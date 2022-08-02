@@ -1,6 +1,5 @@
-package com.uce.edu.demo.repository.modelo;
+package com.uce.edu.demo.correccion.repository.modelo;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,9 +12,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-/*@Entity
+@Entity
 @Table(name = "doctor")
-@NamedQuery(name = "Doctor.buscarPorCedula", query = "SELECT d FROM Doctor d WHERE d.cedula= :datoCedula")*/
+@NamedQuery(name = "Doctor.buscarPorCedula", query = "SELECT d FROM Doctor d WHERE d.cedula= :datoCedula")
 public class Doctor {
 	
 	@Id
@@ -39,20 +38,20 @@ public class Doctor {
 	@Column(name="doct_numero_consultorio")
 	private String numeroConsultorio;
 	
-	@Column(name="doct_titulo")
-	private String titulo;
+	@Column(name="doct_codigo_senescyt")
+	private String codigoSenescyt;
 	
-	@Column(name="doct_salario")
-	private BigDecimal salario;
+	@Column(name="doct_genero")
+	private String genero;
 	
 	@OneToMany(mappedBy = "doctor")
-	private List<Cita_Medica> citasMedicas;
+	private List<CitaMedica> citas;
 
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", fechaNacimiento=" + fechaNacimiento + ", numeroConsultorio=" + numeroConsultorio + ", titulo="
-				+ titulo + ", salario=" + salario + ", citasMedicas=" + citasMedicas + "]";
+				+ ", fechaNacimiento=" + fechaNacimiento + ", numeroConsultorio=" + numeroConsultorio
+				+ ", codigoSenescyt=" + codigoSenescyt + ", genero=" + genero + ", citas=" + citas + "]";
 	}
 
 	//SET y GET
@@ -104,28 +103,28 @@ public class Doctor {
 		this.numeroConsultorio = numeroConsultorio;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getCodigoSenescyt() {
+		return codigoSenescyt;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setCodigoSenescyt(String codigoSenescyt) {
+		this.codigoSenescyt = codigoSenescyt;
 	}
 
-	public BigDecimal getSalario() {
-		return salario;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setSalario(BigDecimal salario) {
-		this.salario = salario;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
-	public List<Cita_Medica> getCitasMedicas() {
-		return citasMedicas;
+	public List<CitaMedica> getCitas() {
+		return citas;
 	}
 
-	public void setCitasMedicas(List<Cita_Medica> citasMedicas) {
-		this.citasMedicas = citasMedicas;
+	public void setCitas(List<CitaMedica> citas) {
+		this.citas = citas;
 	}
 
 }

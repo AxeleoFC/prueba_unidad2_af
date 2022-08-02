@@ -1,4 +1,4 @@
-package com.uce.edu.demo.repository.modelo;
+package com.uce.edu.demo.correccion.repository.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,10 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-/*@Entity
+@Entity
 @Table(name = "cita_medica")
-@NamedQuery(name = "Cita_Medica.buscarPorNumero", query = "SELECT cm FROM Cita_Medica cm WHERE cm.numero= :datoNumero")*/
-public class Cita_Medica {
+@NamedQuery(name = "CitaMedica.buscarPorNumero", query = "SELECT cm FROM CitaMedica cm WHERE cm.numero= :datoNumero")
+public class CitaMedica {
 	
 	@Id
 	@Column(name = "cime_id")
@@ -24,13 +24,13 @@ public class Cita_Medica {
 	@SequenceGenerator(name = "cime_id_seq", sequenceName = "cime_id_seq", allocationSize = 1)
 	private Integer id;
 	
-	@Column(name="cime_numero")
+	@Column(name="cime_numero_cita")
 	private String numero;
 	
 	@Column(name="cime_fecha_cita")
 	private LocalDateTime fechaCita;
 	
-	@Column(name="cime_valor_costo")
+	@Column(name="cime_valor_cita")
 	private BigDecimal valorCita;
 	
 	@Column(name="cime_lugar_cita")
@@ -42,22 +42,24 @@ public class Cita_Medica {
 	@Column(name="cime_receta")
 	private String receta;
 	
-	@Column(name="cime_fecha_control")
-	private LocalDateTime fechaControl;
+	@Column(name="cime_fecha_proxima_cita")
+	private LocalDateTime fechaProximaCita;
 	
 	@ManyToOne
-	@JoinColumn(name="cime_id_doctor")
+	@JoinColumn(name="doct_id")
 	private Doctor doctor;
 	
 	@ManyToOne
-	@JoinColumn(name="cime_id_paciente")
+	@JoinColumn(name="paci_id")
 	private Paciente paciente;
+
+	
 
 	@Override
 	public String toString() {
-		return "Cita_Medica [id=" + id + ", numero=" + numero + ", fechaCita=" + fechaCita + ", valorCita=" + valorCita
-				+ ", lugarCita=" + lugarCita + ", diagnostico=" + diagnostico + ", receta=" + receta + ", fechaControl="
-				+ fechaControl + ", doctor=" + doctor + ", paciente=" + paciente + "]";
+		return "CitaMedica [id=" + id + ", numero=" + numero + ", fechaCita=" + fechaCita + ", valorCita=" + valorCita
+				+ ", lugarCita=" + lugarCita + ", diagnostico=" + diagnostico + ", receta=" + receta
+				+ ", fechaProximaCita=" + fechaProximaCita + ", doctor=" + doctor.getNombre() + ", paciente=" + paciente.getCedula() + "]";
 	}
 
 	//SET y GET
@@ -117,12 +119,12 @@ public class Cita_Medica {
 		this.receta = receta;
 	}
 
-	public LocalDateTime getFechaControl() {
-		return fechaControl;
+	public LocalDateTime getFechaProximaCita() {
+		return fechaProximaCita;
 	}
 
-	public void setFechaControl(LocalDateTime fechaControl) {
-		this.fechaControl = fechaControl;
+	public void setFechaProximaCita(LocalDateTime fechaProximaCita) {
+		this.fechaProximaCita = fechaProximaCita;
 	}
 
 	public Doctor getDoctor() {

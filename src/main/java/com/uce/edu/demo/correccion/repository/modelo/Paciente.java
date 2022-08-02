@@ -1,4 +1,4 @@
-package com.uce.edu.demo.repository.modelo;
+package com.uce.edu.demo.correccion.repository.modelo;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,9 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/*@Entity
+@Entity
 @Table(name = "paciente")
-@NamedQuery(name = "Paciente.buscarPorCedula", query = "SELECT p FROM Paciente p WHERE p.cedula= :datoCedula")*/
+@NamedQuery(name = "Paciente.buscarPorCedula", query = "SELECT p FROM Paciente p WHERE p.cedula= :datoCedula")
 public class Paciente {
 	
 	@Id
@@ -36,8 +36,8 @@ public class Paciente {
 	@Column(name="paci_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
 	
-	@Column(name="paci_codigo_iess")
-	private String codIess;
+	@Column(name="paci_codigo_estatura")
+	private String codigoSeguro;
 	
 	@Column(name="paci_estatura")
 	private Double estatura;
@@ -49,13 +49,13 @@ public class Paciente {
 	private String genero;
 	
 	@OneToMany(mappedBy = "paciente")
-	private List<Cita_Medica> citasMedicas;
+	private List<CitaMedica> citas;
 
 	@Override
 	public String toString() {
 		return "Paciente [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", fechaNacimiento=" + fechaNacimiento + ", codIess=" + codIess + ", estatura=" + estatura + ", peso="
-				+ peso + ", genero=" + genero + ", citasMedicas=" + citasMedicas + "]";
+				+ ", fechaNacimiento=" + fechaNacimiento + ", codigoSeguro=" + codigoSeguro + ", estatura=" + estatura + ", peso="
+				+ peso + ", genero=" + genero + ", citas=" + citas + "]";
 	}
 
 	//SET y GET
@@ -99,12 +99,12 @@ public class Paciente {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public String getCodIess() {
-		return codIess;
+	public String getCodigoSeguro() {
+		return codigoSeguro;
 	}
 
-	public void setCodIess(String codIess) {
-		this.codIess = codIess;
+	public void setCodigoSeguro(String codigoSeguro) {
+		this.codigoSeguro = codigoSeguro;
 	}
 
 	public Double getEstatura() {
@@ -131,11 +131,11 @@ public class Paciente {
 		this.genero = genero;
 	}
 
-	public List<Cita_Medica> getCitasMedicas() {
-		return citasMedicas;
+	public List<CitaMedica> getCitas() {
+		return citas;
 	}
 
-	public void setCitasMedicas(List<Cita_Medica> citasMedicas) {
-		this.citasMedicas = citasMedicas;
+	public void setCitas(List<CitaMedica> citas) {
+		this.citas = citas;
 	}
 }
